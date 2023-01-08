@@ -1,6 +1,11 @@
+from dataclasses import asdict
+from typing import Optional
+
 import uvicorn
 from fastapi import FastAPI
-from app.common.config import conf
+from database.conn import db
+from common.config import conf
+from routes import index
 
 def create_app():
     """
@@ -10,6 +15,11 @@ def create_app():
     
     c = conf()
     app = FastAPI()
+    conf_dict = asdict(c)
+    db.init_app(app, **conf_dict)
+    
+    # 라우터 정의
+    app.include_router(index.router)
     
     
     return app

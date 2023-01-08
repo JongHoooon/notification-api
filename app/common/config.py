@@ -18,6 +18,7 @@ class Config:
 @dataclass
 class LocalConfig(Config):
     PROJ_RELOAD: bool = True
+    DB_URL: str = "mysql+pymysql://root:bromp4881837!!@localhost/notification_api?charset=utf8mb4"
     
     
 @dataclass
